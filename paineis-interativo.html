@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painéis de Indicadores</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    header {
+      height: 60px;
+      background-color: #6a1b9a;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      font-size: 20px;
+      font-weight: bold;
+      gap: 15px;
+    }
+
+    header img {
+      height: 35px;
+    }
+
+    .layout {
+      display: flex;
+      height: calc(100vh - 60px);
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #880e4f;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding-top: 20px;
+      overflow-y: auto;
+    }
+
+    .sidebar button {
+      background: none;
+      border: none;
+      color: white;
+      padding: 15px 20px;
+      text-align: left;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .sidebar button:hover, .sidebar button.active {
+      background-color: #c2185b;
+    }
+
+    .content {
+      flex-grow: 1;
+      background-color: #e3f2fd;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @media (max-width: 768px) {
+      .layout {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        flex-direction: row;
+        width: 100%;
+        height: auto;
+        overflow-x: auto;
+      }
+
+      .sidebar button {
+        flex: 1;
+        justify-content: center;
+        padding: 12px;
+        font-size: 14px;
+      }
+
+      .content {
+        height: calc(100vh - 110px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="speedometer.png" alt="Logo" />
+    Painéis de Indicadores
+  </header>
+
+  <div class="layout">
+    <div class="sidebar">
+      <button onclick="carregarPainel('https://lookerstudio.google.com/embed/reporting/2916e3ab-3e99-4c2c-b074-80c29121c6f3/page/p_60h4b7rsqd')" class="active">
+        <i class="fas fa-chart-line"></i> Pagina inicial
+      </button>
+      <button onclick="carregarPainel('https://lookerstudio.google.com/embed/reporting/fa0a3c01-6f41-4dcd-9a51-b769d53d365b/page/BatKF')">
+        <i class="fas fa-balance-scale"></i> Advocacia
+      </button>
+      <button onclick="carregarPainel('https://lookerstudio.google.com/embed/reporting/5d0796c0-7810-4453-a59c-b17af97ef939/page/LFejD')">
+        <i class="fas fa-gavel"></i> Concurso
+      </button>
+      <button onclick="carregarPainel('https://www.openai.com')">
+        <i class="fas fa-database"></i> ChatGPT
+      </button>
+      <button onclick="carregarPainel('https://www.wikipedia.org')">
+        <i class="fas fa-search"></i> Pesquisar
+      </button>
+    </div>
+
+    <div class="content">
+      <iframe id="painelFrame" src="https://lookerstudio.google.com/embed/reporting/2916e3ab-3e99-4c2c-b074-80c29121c6f3/page/p_60h4b7rsqd"></iframe>
+    </div>
+  </div>
+
+  <script>
+    function carregarPainel(url) {
+      document.getElementById('painelFrame').src = url;
+      document.querySelectorAll('.sidebar button').forEach(btn => btn.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+    }
+  </script>
+</body>
+</html>
